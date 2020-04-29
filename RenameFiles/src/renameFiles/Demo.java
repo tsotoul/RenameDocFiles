@@ -16,5 +16,6 @@ public class Demo {
 	public static void main(String[] args){
 		
 		Rename current = new Rename();
+		current.renameFiles();
 	}
 }
