@@ -17,5 +17,6 @@ public class Demo {
 		
 		Rename current = new Rename();
 		
+		
 	}
 }
