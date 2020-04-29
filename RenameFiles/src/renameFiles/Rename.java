@@ -49,5 +49,19 @@ public class Rename {
 			}
 		}
 	}
+	
+	public void undoChangeFileName() {
+		for (File file : files) {
+			String fileName = file.getName();	//get the name of every file
+			if(fileName.endsWith(fileType)) {
+				String fileNewName = fileName.substring(11);
+				System.out.println(fileNewName);
+				
+				File fileNew = new File(fileNewName);
+				boolean success = file.renameTo(fileNew);	
+				
+			}
+		}
+	}
 
 }
