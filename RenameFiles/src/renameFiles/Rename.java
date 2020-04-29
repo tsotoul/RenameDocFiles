@@ -11,28 +11,28 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 public class Rename {
-	File folder = new File(".");
-	File[] files = folder.listFiles();
+	File folder = new File(".");				//get the current path
+	File[] files = folder.listFiles();			//get a list of all the files
 	
 	public void renameFiles() {
 		for (File file : files) {
-			String fileName = file.getName();
-			if(fileName.endsWith(".docx")) {
-				Path filePath = file.toPath();
+			String fileName = file.getName();	//get the name of every file
+			if(fileName.endsWith(".docx") || fileName.endsWith(".doc")) {	//if the file is a .docx
+				Path filePath = file.toPath();		//get the path of the file
 				BasicFileAttributes attr;
 				try {
-					attr = Files.readAttributes(filePath, BasicFileAttributes.class);
-					FileTime date = attr.creationTime();
-					SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-					String dateCreated = df.format(date.toMillis());
-					System.out.println(dateCreated);
-					File fileNew = new File(dateCreated + "_" + fileName);
-					System.out.println(fileNew.getName());
+					attr = Files.readAttributes(filePath, BasicFileAttributes.class);	//create the attributes
+					FileTime date = attr.creationTime();								//get the creation time
+					SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");			//get a date format we want
+					String dateCreated = df.format(date.toMillis());					//create a string with the date
 					
-					boolean success = file.renameTo(fileNew);
+					File fileNew = new File(dateCreated + "_" + fileName);				//create the new file name
+					
+					
+					boolean success = file.renameTo(fileNew);							//rename the file
 					
 					if(success) {
-						System.out.println("all good");
+						System.out.println("Files renamed successfully");
 					}
 					else {
 						System.out.println("PROBLEM");
