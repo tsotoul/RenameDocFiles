@@ -19,24 +19,49 @@ public class Rename {
 		File[] files = folder.listFiles();			//get a list of all the files
 		for (File file : files) {
 			String fileName = file.getName();	//get the name of every file
-			changeFileName(file, fileName, fileType2);
+			
+			
+			if(fileName.endsWith(fileType1)) {	//if the file is a .docx
+				Path filePath = file.toPath();		//get the path of the file
+				BasicFileAttributes attr;
+				try {
+					attr = Files.readAttributes(filePath, BasicFileAttributes.class);	//create the attributes
+					FileTime date = attr.creationTime();								//get the creation time
+					SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");			//get a date format we want
+					String dateCreated = df.format(date.toMillis());					//create a string with the date
+					
+					File fileNew = new File(dateCreated + "_" + fileName);				//create the new file name
+					
+					
+					boolean success = file.renameTo(fileNew);							//rename the file
+					
+					if(success) {
+						System.out.println("Files renamed successfully");
+					}
+					else {
+						System.out.println("PROBLEM");
+					}
+				} catch (IOException e) {
+					JOptionPane.showMessageDialog(null, "There are no .docx files");
+					e.printStackTrace();
+				}
+			}			
 		}
 	}
+
 	
-	public void changeFileName(File file, String fileName, String fileType) {
-		if(fileName.endsWith(fileType)) {	//if the file is a .docx
-			Path filePath = file.toPath();		//get the path of the file
-			BasicFileAttributes attr;
-			try {
-				attr = Files.readAttributes(filePath, BasicFileAttributes.class);	//create the attributes
-				FileTime date = attr.creationTime();								//get the creation time
-				SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");			//get a date format we want
-				String dateCreated = df.format(date.toMillis());					//create a string with the date
+	public void undoChangeFileName() {
+		File folder = new File(".");				//get the current path
+		File[] files = folder.listFiles();			//get a list of all the files
+		for (File file : files) {
+			String fileName = file.getName();	//get the name of every file
+			
+			if(fileName.endsWith(fileType1)) {
+				String fileNewName = fileName.substring(11);
+				System.out.println(fileNewName);
 				
-				File fileNew = new File(dateCreated + "_" + fileName);				//create the new file name
-				
-				
-				boolean success = file.renameTo(fileNew);							//rename the file
+				File fileNew = new File(fileNewName);
+				boolean success = file.renameTo(fileNew);	
 				
 				if(success) {
 					System.out.println("Files renamed successfully");
@@ -44,36 +69,10 @@ public class Rename {
 				else {
 					System.out.println("PROBLEM");
 				}
-			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "There are no .docx files");
-				e.printStackTrace();
 			}
+			
+			
 		}
 	}
 	
-	public void undoChangeFileName() {
-		File folder = new File(".");				//get the current path
-		File[] files = folder.listFiles();			//get a list of all the files
-		for (File file : files) {
-			String fileName = file.getName();	//get the name of every file
-			returnFileName(file, fileName, fileType2);
-		}
-	}
-	
-	public void returnFileName(File file, String fileName, String fileType) {
-		if(fileName.endsWith(fileType)) {
-			String fileNewName = fileName.substring(11);
-			System.out.println(fileNewName);
-			
-			File fileNew = new File(fileNewName);
-			boolean success = file.renameTo(fileNew);	
-			
-			if(success) {
-				System.out.println("Files renamed successfully");
-			}
-			else {
-				System.out.println("PROBLEM");
-			}
-		}
-	}
 }
