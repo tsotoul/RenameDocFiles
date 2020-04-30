@@ -8,4 +8,3 @@ test.docx ---> 28-04-2020_test.dox
 
 To be used mostly as a .jar file inside directories. 
 
-GUI to follow.
