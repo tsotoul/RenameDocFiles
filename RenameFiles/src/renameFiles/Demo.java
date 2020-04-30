@@ -15,8 +15,7 @@ public class Demo {
 
 	public static void main(String[] args){
 		
-		Rename current = new Rename();
-		//current.renameFiles();
-		current.undoChangeFileName();
+		GUI newGUI = new GUI();
+		newGUI.setVisible(true);
 	}
 }

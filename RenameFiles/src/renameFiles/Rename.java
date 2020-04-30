@@ -60,6 +60,13 @@ public class Rename {
 				File fileNew = new File(fileNewName);
 				boolean success = file.renameTo(fileNew);	
 				
+				if(success) {
+					System.out.println("Files renamed successfully");
+				}
+				else {
+					System.out.println("PROBLEM");
+				}
+				
 			}
 		}
 	}
