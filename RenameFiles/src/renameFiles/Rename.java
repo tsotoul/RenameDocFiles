@@ -11,11 +11,12 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 public class Rename {
-	private String fileType = ".docx";
-	File folder = new File(".");				//get the current path
-	File[] files = folder.listFiles();			//get a list of all the files
+	String fileType = ".docx";
+	
 	
 	public void renameFiles() {
+		File folder = new File(".");				//get the current path
+		File[] files = folder.listFiles();			//get a list of all the files
 		for (File file : files) {
 			String fileName = file.getName();	//get the name of every file
 			changeFileName(file, fileName, fileType);
@@ -51,6 +52,8 @@ public class Rename {
 	}
 	
 	public void undoChangeFileName() {
+		File folder = new File(".");				//get the current path
+		File[] files = folder.listFiles();			//get a list of all the files
 		for (File file : files) {
 			String fileName = file.getName();	//get the name of every file
 			if(fileName.endsWith(fileType)) {
