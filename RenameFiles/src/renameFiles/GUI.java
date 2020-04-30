@@ -9,6 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class GUI extends JFrame {
 
@@ -36,7 +39,7 @@ public class GUI extends JFrame {
 	 */
 	public GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 639, 511);
+		setBounds(100, 100, 465, 228);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -48,7 +51,7 @@ public class GUI extends JFrame {
 				current.renameFiles();
 			}
 		});
-		btnChange.setBounds(67, 122, 97, 25);
+		btnChange.setBounds(84, 98, 97, 25);
 		contentPane.add(btnChange);
 		
 		JButton btnUndo = new JButton("Undo");
@@ -57,7 +60,13 @@ public class GUI extends JFrame {
 				current.undoChangeFileName();
 			}
 		});
-		btnUndo.setBounds(394, 122, 97, 25);
+		btnUndo.setBounds(265, 98, 97, 25);
 		contentPane.add(btnUndo);
+		
+		JLabel lblNewLabel = new JLabel("Rename the Files");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 30));
+		lblNewLabel.setBounds(66, 13, 314, 96);
+		contentPane.add(lblNewLabel);
 	}
 }

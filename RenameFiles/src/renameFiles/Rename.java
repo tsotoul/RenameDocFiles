@@ -11,15 +11,15 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 public class Rename {
-	String fileType = ".docx";
-	
+	String fileType1 = ".docx";
+	String fileType2 = ".doc";
 	
 	public void renameFiles() {
 		File folder = new File(".");				//get the current path
 		File[] files = folder.listFiles();			//get a list of all the files
 		for (File file : files) {
 			String fileName = file.getName();	//get the name of every file
-			changeFileName(file, fileName, fileType);
+			changeFileName(file, fileName, fileType2);
 		}
 	}
 	
@@ -56,22 +56,24 @@ public class Rename {
 		File[] files = folder.listFiles();			//get a list of all the files
 		for (File file : files) {
 			String fileName = file.getName();	//get the name of every file
-			if(fileName.endsWith(fileType)) {
-				String fileNewName = fileName.substring(11);
-				System.out.println(fileNewName);
-				
-				File fileNew = new File(fileNewName);
-				boolean success = file.renameTo(fileNew);	
-				
-				if(success) {
-					System.out.println("Files renamed successfully");
-				}
-				else {
-					System.out.println("PROBLEM");
-				}
-				
+			returnFileName(file, fileName, fileType2);
+		}
+	}
+	
+	public void returnFileName(File file, String fileName, String fileType) {
+		if(fileName.endsWith(fileType)) {
+			String fileNewName = fileName.substring(11);
+			System.out.println(fileNewName);
+			
+			File fileNew = new File(fileNewName);
+			boolean success = file.renameTo(fileNew);	
+			
+			if(success) {
+				System.out.println("Files renamed successfully");
+			}
+			else {
+				System.out.println("PROBLEM");
 			}
 		}
 	}
-
 }
